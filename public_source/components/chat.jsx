@@ -1,5 +1,7 @@
 define(function(require) {
 
+	'use strict';
+
 	var React = require('react');
 
 	var Chat = React.createClass({
@@ -8,7 +10,7 @@ define(function(require) {
 			return {
 				entries: [],
 				input: ''
-			}
+			};
 		},
 
 		componentDidMount: function () {
@@ -23,7 +25,7 @@ define(function(require) {
 		componentDidUpdate: function() {
 			if (this.shouldScrollBottom) {
 				var node = React.findDOMNode(this.refs.scroll);
-				node.scrollTop = node.scrollHeight
+				node.scrollTop = node.scrollHeight;
 			}
 		},
 

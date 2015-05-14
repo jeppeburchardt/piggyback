@@ -2,8 +2,8 @@ module.exports = function(grunt) {
 	
 	grunt.config.merge({
 		watch: {
-			files: "./public_source/styles/**",
-			tasks: ["less:development"]
+			files: ['./public_source/**'],
+			tasks: ['less:development', 'jshint']
 		}
 	});
 

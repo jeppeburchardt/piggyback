@@ -59,8 +59,8 @@ define(function(require){
 		onRoomChange: function () {
 			this.setState({
 				room: this.socket.room,
-				canAdd: (this.socket.room.owner == this.state.userId || this.socket.room.open),
-				isOwner: (this.socket.room.owner == this.state.userId),
+				canAdd: (this.socket.room.owner === this.state.userId || this.socket.room.open),
+				isOwner: (this.socket.room.owner === this.state.userId),
 			});
 		},
 
@@ -179,7 +179,7 @@ define(function(require){
 			this.socket.setName(name);
 		},
 
-		onCreateRoom: function (e) {
+		onCreateRoom: function () {
 			this.socket.createRoom();
 		},
 
@@ -210,7 +210,7 @@ define(function(require){
 			this.refs.player.unMute();
 		},
 
-		onContentComplete: function (item) {
+		onContentComplete: function () {
 			this.socket.onPlaybackComplete();
 		},
 

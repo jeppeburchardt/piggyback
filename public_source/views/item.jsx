@@ -1,5 +1,7 @@
 define(function (require) {
 
+	'use strict';
+
 	var React = require('react');
 
 	var Item = React.createClass({

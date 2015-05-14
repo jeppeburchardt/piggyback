@@ -1,5 +1,6 @@
 define(function(require) {
 
+	'use strict';
 
 	var React = require('react');
 	var Item = require('jsx!views/item');

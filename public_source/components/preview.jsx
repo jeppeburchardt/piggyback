@@ -1,5 +1,7 @@
 define(function(require) {
 
+	'use strict';
+
 	var React = require('react');
 	var Player = require('jsx!views/player');
 	var CTG = React.addons.CSSTransitionGroup;
@@ -24,7 +26,7 @@ define(function(require) {
 						</div>
 					</div>
 				));
-			};
+			}
 
 			return(
 				<CTG transitionName="modal">

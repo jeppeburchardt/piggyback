@@ -36,7 +36,7 @@ define(function (require) {
 			);
 		},
 
-		onClick: function(e) {
+		onClick: function() {
 			this.props.onJoinRoom(this.props.room);
 		},
 
@@ -80,7 +80,7 @@ define(function (require) {
 			this.props.onJoinRoom(room);
 		},
 
-		onClickCreateRoom: function(e) {
+		onClickCreateRoom: function() {
 			this.props.onCreateRoom();
 		},
 

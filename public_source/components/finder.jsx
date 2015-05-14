@@ -1,5 +1,7 @@
 define(function(require) {
 
+	'use strict';
+
 	var React = require('react');
 	var ListItem = require('jsx!views/list-item');
 
@@ -11,7 +13,7 @@ define(function(require) {
 				term: '',
 				loading: false,
 				error: null
-			}
+			};
 		},
 
 		render: function () {

@@ -3,7 +3,7 @@ define(function (require) {
 	'use strict';
 
 	var React = require('react');
-	var YuoTubeApi = require('http://www.youtube.com/iframe_api');
+	var YuoTubeApi = require('YuoTubeApi');
 
 	var Player = React.createClass({
 
@@ -62,7 +62,7 @@ define(function (require) {
 
 			//if (!this.player || (this.player && this.player.getVideoData().video_id != this.props.content.id)) { 
 
-			if (this.currentVideoId != this.props.content.id) {
+			if (this.currentVideoId !== this.props.content.id) {
 
 				if (this.player) {
 					this.player.destroy();
@@ -76,7 +76,7 @@ define(function (require) {
 				container.innerHTML = '';
 				container.appendChild(el);
 
-				this.player = new YT.Player(el, {
+				this.player = new YuoTubeApi.Player(el, {
 					height: '100%',
 					width: '100%',
 					videoId: this.props.content.id,

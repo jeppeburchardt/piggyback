@@ -1,5 +1,7 @@
 define(function(require) {
 
+	'use strict';
+
 	var P = require('p');
 
 	var URL = 'https://www.googleapis.com/youtube/v3/search';
@@ -8,7 +10,7 @@ define(function(require) {
 
 	function YouTubeService() {
 
-		var self = this;
+		// var self = this;
 
 		this.search = function(term) {
 
@@ -35,7 +37,7 @@ define(function(require) {
 
 			request.send();
 			return deferred.promise;
-		}
+		};
 
 		function convertResult(result) {
 
@@ -47,7 +49,7 @@ define(function(require) {
 					description: item.snippet.description,
 					published: item.snippet.publishedAt,
 					key: item.id.videoId,
-				}
+				};
 			}));
 
 		}
