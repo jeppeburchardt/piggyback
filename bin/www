@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+var piggyback = require('../source/app'),
+	app = piggyback.app,
+	server = piggyback.server;
+
+app.set('port', process.env.PORT || 3000);
+
+server.listen(app.get('port'), function() {
+	console.log(app.get('env') + ' on port ' + server.address().port);
+});

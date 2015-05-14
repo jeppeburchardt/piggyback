@@ -1,0 +1,15 @@
+.app {
+	height: 100%;
+	background-color: @app-bg;
+	.content-box();
+}
+
+.workspace {
+	.hardware-accelerate();
+	transition: all 300ms ease-in-out;
+
+	&.preview {
+
+		transform: scale(0.95);
+	}
+}

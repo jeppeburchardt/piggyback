@@ -1,0 +1,39 @@
+.modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: @modal-underlay-bg;
+	.hardware-accelerate();
+	z-index: 1024;
+
+	&-header {
+		text-align: center;
+	}
+
+	&-content {
+		min-width: 500px;
+		padding: @large;
+		background: @modal-content-bg;
+		.shadow();
+	}
+}
+.modal-enter {
+  opacity: 0.01;
+  transform: scale(1.1);
+  transition: all 300ms ease-in-out;
+}
+.modal-enter.modal-enter-active {
+  opacity: 1;
+  transform: scale(1);
+}
+.modal-leave {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 300ms ease-in-out;
+}
+.modal-leave.modal-leave-active {
+  transform: scale(1.1);
+  opacity: 0.01;
+}

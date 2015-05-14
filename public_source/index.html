@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="styles.css" />
+		<style>
+			body { 
+				background-color: #ccc;
+			}
+			.spinner { 
+				position: absolute;
+				top: calc(50% - 10px);
+				left: calc(50% - 10px);
+				height: 20px;
+				width: 20px;
+				border: 2px solid;
+				border-radius: 20px;
+				border-color: rgba(0,0,0,0.7) rgba(0,0,0,0) rgba(0,0,0,0.2) rgba(0,0,0,0.4);
+				-webkit-animation:spin 300ms linear infinite;
+				-moz-animation:spin 300ms linear infinite;
+				animation:spin 300ms linear infinite;
+			}
+			@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+			@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+			@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+		</style>
+		<script data-main="main.js" src="require.js"></script>
+	</head>
+	<body><div class="spinner"></div></body>
+</html>

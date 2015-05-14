@@ -1,0 +1,62 @@
+
+.btn {
+	.border-box();
+	border: 0;
+	border-radius: @xxsmall;
+	padding: @xsmall @medium;
+	background: @btn-bg;
+	color: @btn-color;
+	cursor: pointer;
+	text-align: center;
+	font-size: @app-size;
+	font-weight: @btn-weight;
+
+	&:hover {
+		background: @btn-hover-bg;
+	}
+
+	&.cta {
+		background: @btn-cta-bg;
+		text-transform: uppercase;
+		&:hover {
+			background: @btn-cta-hover-bg;
+		}
+	}
+
+	&--outlined {
+		background: transparent;
+		border: @line solid;
+		text-transform: uppercase;
+		color: @btn-bg;
+
+		&:hover {
+			background: transparent;
+			color: @btn-hover-bg;
+		}
+
+		&.cta {
+			background: transparent;
+			color: @cta-color;
+
+			&:hover {
+				background: transparent;
+				color: @btn-cta-hover-bg;
+			}			
+		}
+	}
+
+	&--clear {
+		background: transparent;
+		color: @app-text;
+		padding: 0;
+
+		&:hover {
+			background: transparent;
+			color: @cta-color;
+		}
+	}
+
+	.modal &.epic {
+		padding: @medium @large;
+	}
+}
