@@ -78,7 +78,7 @@ function SocketServer(io) {
 		var r = rooms.filter(function(room) {
 			return (room.id === id);
 		});
-		return (r.length == 1 ? r[0] : null);
+		return (r.length === 1 ? r[0] : null);
 	}
 
 	function updateLobby() {
@@ -139,6 +139,7 @@ function SocketServer(io) {
 			var room = getRoomById(socket.roomId);
 			if (room.owner == socket.id) {
 				room.open = value;
+				room.chat(value ? 'Everyone can modify playlist' : 'Only owner can edit playlist', -1);
 			}
 			room.update(); 
 			updateLobby();

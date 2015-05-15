@@ -24,7 +24,7 @@ define(function (require) {
 			}
 
 			return (
-				<li className="column padded">
+				<li className="lobby-room-item column padded">
 					<div className="item epic">{this.props.room.title}</div>
 					{playlist}
 					<div className="item row padded">

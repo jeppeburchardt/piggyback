@@ -30,7 +30,9 @@ define(function (require) {
 		},
 
 		onSelect: function() {
-			this.props.onSelect(this.props.item);
+			if (this.props.onSelect) {
+				this.props.onSelect(this.props.item);
+			}
 		},
 
 	});

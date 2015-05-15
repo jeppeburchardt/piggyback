@@ -58,7 +58,9 @@ define(function (require) {
 		},
 
 		updateVideo: function() {
-			if (!this.props.content) return;
+			if (!this.props.content) {
+				return;
+			}
 
 			//if (!this.player || (this.player && this.player.getVideoData().video_id != this.props.content.id)) { 
 
@@ -89,9 +91,6 @@ define(function (require) {
 
 				this.currentVideoId = this.props.content.id;
 			}
-
-				
-			//}
 		},
 
 		onSyncChange: function (value) {

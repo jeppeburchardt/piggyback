@@ -6,7 +6,7 @@ require.config({
 		'text': '../bower_components/requirejs-text/text',
 		'p': '../bower_components/p-promise/p',
 		'socketio': '../bower_components/socket.io-client/socket.io',
-		'YuoTubeApi': 'http://www.youtube.com/iframe_api',
+		'YuoTubeApi': 'http://www.youtube.com/iframe_api?noext',
 	},
 
 	shim : {
@@ -36,4 +36,4 @@ require.config({
 	}
 });
 
-require('app');
+require(['app']);

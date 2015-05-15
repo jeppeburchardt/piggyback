@@ -388,3 +388,6 @@ button {
   max-width: 60%;
   margin: 0 auto;
 }
+.lobby-room-item {
+  margin-bottom: 16px;
+}

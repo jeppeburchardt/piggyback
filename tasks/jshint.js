@@ -4,7 +4,11 @@ module.exports = function(grunt) {
 		jshint: {
 			development: {
 				files: {
-					src: ['public_source/**/*.js', 'public_source/**/*.jsx']
+					src: [
+						'public_source/**/*.js',
+						'public_source/**/*.jsx',
+						// 'source/**/*.js'
+					]
 				},
 				options: {
 					jshintrc: '.jshintrc'
