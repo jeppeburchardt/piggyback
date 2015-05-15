@@ -3,7 +3,7 @@ define(function(require) {
 	'use strict';
 
 	var React = require('react');
-	var Player = require('jsx!views/player');
+	var Player = require('jsx!components/ui/player');
 	var CTG = React.addons.CSSTransitionGroup;
 
 	var Preview = React.createClass({

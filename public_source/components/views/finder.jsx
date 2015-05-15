@@ -3,7 +3,7 @@ define(function(require) {
 	'use strict';
 
 	var React = require('react');
-	var ListItem = require('jsx!views/list-item');
+	var ListItem = require('jsx!components/ui/list-item');
 
 	var Finder = React.createClass({
 

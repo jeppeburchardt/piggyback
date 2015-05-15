@@ -1,4 +1,4 @@
-require(['react', 'jsx!components/app'], function(React, App){
+require(['react', 'jsx!components/views/app'], function(React, App){
 
 	'use strict';
 

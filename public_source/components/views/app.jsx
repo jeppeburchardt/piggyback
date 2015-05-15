@@ -4,16 +4,16 @@ define(function(require){
 	
 	var React = require('react');
 	
-	var SignIn = require('jsx!components/signin');
-	var Lobby = require('jsx!components/lobby');
-	var Finder = require('jsx!components/finder');
-	var Playlist = require('jsx!components/playlist');
-	var Chat = require('jsx!components/chat');
-	var Preview = require('jsx!components/preview');
+	var SignIn = require('jsx!components/views/signin');
+	var Lobby = require('jsx!components/views/lobby');
+	var Finder = require('jsx!components/views/finder');
+	var Playlist = require('jsx!components/views/playlist');
+	var Chat = require('jsx!components/views/chat');
+	var Preview = require('jsx!components/views/preview');
 
-	var Player = require('jsx!views/player');
-	var CheckBox = require('jsx!views/checkbox');
-	var Masthead = require('jsx!views/masthead');
+	var Player = require('jsx!components/ui/player');
+	var CheckBox = require('jsx!components/ui/checkbox');
+	var Masthead = require('jsx!components/ui/masthead');
 	
 	var YouTubeService = require('services/youtube');
 	var Socket = require('services/socket');
