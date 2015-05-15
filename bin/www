@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 var piggyback = require('../source/app'),
 	app = piggyback.app,
 	server = piggyback.server;
