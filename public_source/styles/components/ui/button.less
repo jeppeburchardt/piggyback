@@ -8,8 +8,8 @@
 	color: @btn-color;
 	cursor: pointer;
 	text-align: center;
-	font-size: @app-size;
-	font-weight: @btn-weight;
+
+	.transition();
 
 	&:hover {
 		background: @btn-hover-bg;
@@ -27,6 +27,7 @@
 		background: transparent;
 		border: @line solid;
 		text-transform: uppercase;
+		font-weight: @btn-outlined-weight;
 		color: @btn-bg;
 
 		&:hover {

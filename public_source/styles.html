@@ -2,31 +2,187 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="styles.css" />
+		<style>
+			.test-case {
+				background: #ccc;
+				padding: 16px;
+				margin-bottom: 8px;
+			}
+			.test-p {
+				padding-bottom: 4px;
+			}
+			section {
+				max-width: 700px;
+				margin: auto;
+				padding: 16px;
+			}
+			h1, h2, h3 {
+				margin: 4px 0;
+			}
+			.outline {
+				outline: 1px solid yellow;
+			}
+			.outline .outline {
+				outline: 1px dashed red;
+			}
+			.height200 {
+				height: 100px;
+			}
+		</style>
 	</head>
 	<body>
 		
-		<div class="app column">
+		<section>
+			<h1 class="epic">Typography</h1>
+			<div class="test-case">
+				<p class="test-p ">Normal: Grumpy wizards make toxic brew for the evil Queen and Jack.</p>
+				<p class="test-p strong">Strong: Grumpy wizards make toxic brew for the evil Queen and Jack.</p>
+				<p class="test-p cta">Call to Action: Grumpy wizards make toxic brew for the evil Queen and Jack.</p>
+				<p class="test-p epic">Epic: Grumpy wizards make toxic brew for the evil Queen and Jack.</p>
+				<p class="test-p nerf">Nerf: Grumpy wizards make toxic brew for the evil Queen and Jack.</p>
+			</div>
+			<h2 class="strong">Ellipsis</h2>
+			<div class="test-case">
+				<p class="ellipsis" title="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.">
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+				</p>
+			</div>
+		</section>
 
-			<div class="item item--fit">
-				<div class="row">
-					<div class="item item--fit image" style="background-color:red;"></div>
-					<div class="item column">
-						<div class="item">asdasdas</div>
-						<div class="item">asdasdas</div>
-					</div>
+		<section>
+			<h1 class="epic">Button</h1>
+			<div class="test-case">
+				<button class="btn">Button</button>
+				<button class="btn btn--outlined">Outlined</button>
+			</div>
+			<h2 class="strong">cta mod</h2>
+			<div class="test-case">
+				<button class="btn cta">Button</button>
+				<button class="btn btn--outlined cta">Outlined</button>
+			</div>
+			<h2 class="strong">epic mod</h2>
+			<div class="test-case">
+				<button class="btn epic">Button</button>
+				<button class="btn btn--outlined epic">Outlined</button>
+			</div>
+			<h2 class="strong">nerf mod</h2>
+			<div class="test-case">
+				<button class="btn nerf">Button</button>
+				<button class="btn btn--outlined nerf">Outlined</button>
+			</div>
+			<h2 class="strong">As grid items with aditional content</h2>
+			<div class="test-case">
+				<div class="row padded">
+					<button class="item btn btn--outlined">
+						<p class="epic">Large text</p>
+						<p class="nerf">Anitional information</p>
+					</button>
+					<button class="item cta btn btn--outlined">
+						<p class="epic">Large text</p>
+						<p class="nerf">Anitional information</p>
+					</button>
 				</div>
 			</div>
-			<div class="item item--fit">
-				<div class="row">
-					<div class="item item--fit image" style="background-color:red;"></div>
-					<div class="item column">
-						<div class="item">asdasdas</div>
-						<div class="item">asdasdas</div>
-					</div>
+		</section>
+
+		<section>
+			<h1 class="epic">Select</h1>
+			<div class="test-case">
+				<div class="select">
+					<select>
+						<option value="2">Select</option>
+						<option value="3">Sound Cloud</option>
+					</select>
 				</div>
 			</div>
+			<h2 class="strong">cta mod</h2>
+			<div class="test-case">
+				<div class="select cta">
+					<select>
+						<option value="2">Call to Action</option>
+						<option value="3">Sound Cloud</option>
+					</select>
+				</div>
+			</div>
+			<h2 class="strong">epic mod</h2>
+			<div class="test-case">
+				<div class="select epic">
+					<select>
+						<option value="2">Epic</option>
+						<option value="3">Sound Cloud</option>
+					</select>
+				</div>
+			</div>
+			<h2 class="strong">nerf mod</h2>
+			<div class="test-case">
+				<div class="select nerf">
+					<select>
+						<option value="2">Epic</option>
+						<option value="3">Sound Cloud</option>
+					</select>
+				</div>
+			</div>
+		</section>
 
-		</div>
+		<section>
+			<h1 class="epic">Checkbox</h1>
+			<div class="test-case">
+				<label class="checkbox">
+					<input type="checkbox" checked="checked" />
+					<span class="label">Normal checkbox</span>
+				</label>
+			</div>
+			<h2 class="strong">epic mod</h2>
+			<div class="test-case">
+				<label class="checkbox epic">
+					<input type="checkbox" checked="checked" />
+					<span class="label">Epic checkbox</span>
+				</label>
+			</div>
+			<h2 class="strong">nerf mod</h2>
+			<div class="test-case">
+				<label class="checkbox nerf">
+					<input type="checkbox" checked="checked" />
+					<span class="label">Nerf checkbox</span>
+				</label>
+			</div>
+		</section>
+
+		<section>
+			<h1 class="epic">Grid</h1>
+			<div class="test-case">
+				<div class="row padded height200">
+					<div class="item outline">Item 1</div>
+					<div class="item item--fit outline">
+						<p>Item 2 fit</p>
+						<p class="ellipsis">Item 2 ellipsis</p>
+					</div>
+					<div class="item outline">
+						<p>Item 3</p>
+						<div style="max-width: 100%;">
+						<p class="ellipsis">Item 3 Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p></div>
+						</div>
+				</div>
+			</div>
+			<div class="test-case">
+				<div class="column padded height200">
+					<div class="item outline">Item 1</div>
+					<div class="item item--fit outline">Item 2 fit</div>
+					<div class="item outline">Item 3</div>
+				</div>
+			</div>
+			<div class="test-case">
+				<div class="row padded height200">
+					<div class="item column outline padded">
+						<div class="item outline">item 1.1</div>
+						<div class="item item--fit outline">item 1.2 fit</div>
+						<div class="item outline">item 1.3</div>
+					</div>
+					<div class="item item--fit outline">Item 2 fit</div>
+					<div class="item outline">Item 3</div>
+				</div>
+			</div>
+		</section>
 
 	</body>
 </html>
