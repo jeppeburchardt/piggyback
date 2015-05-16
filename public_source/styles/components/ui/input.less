@@ -134,23 +134,24 @@
 		border: none;
 	}
 
-	&:hover {
-		background: @select-hover-bg; 
+	// &:hover {
+	// 	&:before {
+	// 		bottom: @small + 3px;
+	// 		transform: rotate(135deg);
+	// 	}
+	// 	&.nerf:before {
+	// 		bottom: @small;
+	// 	}
+	// }
 
+	&.epic {
 		&:before {
-			bottom: @small + 3px;
-			transform: rotate(135deg);
-		}
-		&.nerf:before {
-			bottom: @small;
+			bottom: 10px;
 		}
 	}
 
 	&.cta {
 		background: @cta-color;
-		&:hover {
-			background: @btn-cta-hover-bg;
-		}
 	}
 
 }

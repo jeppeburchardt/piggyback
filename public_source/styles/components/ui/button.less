@@ -11,15 +11,15 @@
 
 	.transition();
 
-	&:hover {
-		background: @btn-hover-bg;
+	&:active {
+		background: @btn-active-bg;
 	}
 
 	&.cta {
 		background: @btn-cta-bg;
 		text-transform: uppercase;
-		&:hover {
-			background: @btn-cta-hover-bg;
+		&:active {
+			background: @btn-cta-active-bg;
 		}
 	}
 
@@ -30,18 +30,18 @@
 		font-weight: @btn-outlined-weight;
 		color: @btn-bg;
 
-		&:hover {
+		&:active {
 			background: transparent;
-			color: @btn-hover-bg;
+			color: @btn-active-bg;
 		}
 
 		&.cta {
 			background: transparent;
 			color: @cta-color;
 
-			&:hover {
+			&:active {
 				background: transparent;
-				color: @btn-cta-hover-bg;
+				color: @btn-cta-active-bg;
 			}			
 		}
 	}
@@ -51,7 +51,7 @@
 		color: @app-text;
 		padding: 0;
 
-		&:hover {
+		&:active {
 			background: transparent;
 			color: @cta-color;
 		}
