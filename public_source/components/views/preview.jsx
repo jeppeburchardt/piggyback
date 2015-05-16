@@ -18,7 +18,7 @@ define(function(require) {
 				modal.push((
 					<div className="modal grail" key={this.props.content.id}>
 						<div className="modal-content column padded-large item ite--fit">
-							<Player content={this.props.content} />
+							<Player content={this.props.content} controls={true} />
 							<div className="row item item--fit padded-large">
 								<button onClick={this.onClickCancel} className="item btn btn--outlined epic">Cancel</button>
 								<button onClick={this.onClickConfirm} className="item btn btn--outlined cta epic">{this.props.label}</button>

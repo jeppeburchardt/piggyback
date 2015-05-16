@@ -151,7 +151,7 @@ define(function(require){
 					<div className={workspaceClassName}>
 						<div className="row item padded">
 							<div className="item column padded">
-								<Player ref="player" content={this.state.room.playlist[0]} onTimeUpdate={this.onTimeUpdate} onComplete={this.onContentComplete} />
+								<Player ref="player" content={this.state.room.playlist[0]} onTimeUpdate={this.onTimeUpdate} onComplete={this.onContentComplete} controls={false} />
 								<div className="item item--fit row padded">
 									{sync}
 									{settings}

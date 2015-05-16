@@ -12,7 +12,8 @@ define(function (require) {
 
 		propTypes: {
 			onTimeUpdate: React.PropTypes.func,
-			onComplete: React.PropTypes.func
+			onComplete: React.PropTypes.func,
+			controls: React.PropTypes.bool,
 		},
 
 		render: function() {
@@ -62,8 +63,6 @@ define(function (require) {
 				return;
 			}
 
-			//if (!this.player || (this.player && this.player.getVideoData().video_id != this.props.content.id)) { 
-
 			if (this.currentVideoId !== this.props.content.id) {
 
 				if (this.player) {
@@ -77,15 +76,18 @@ define(function (require) {
 				var container = React.findDOMNode(this.refs.playerContainer);
 				container.innerHTML = '';
 				container.appendChild(el);
-
+				
 				this.player = new YuoTubeApi.Player(el, {
 					height: '100%',
 					width: '100%',
 					videoId: this.props.content.id,
-					playerVars: { 'autoplay': 1, controls: 0 }, // 
+					playerVars: {
+						autoplay: 1, 
+						controls: (this.props.controls ? 1 : 0),
+					}, 
 					events: {
-						'onStateChange': this.onPlayerStateChange,
-						'onError': this.onPlayerError,
+						onStateChange: this.onPlayerStateChange,
+						onError: this.onPlayerError,
 					}
 				});
 
