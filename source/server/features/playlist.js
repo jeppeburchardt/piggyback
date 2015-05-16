@@ -11,6 +11,7 @@ function Playlist() {
 			if (msg.type === 'add') {
 
 				if (client === channel.owner || this.accessType === 'all') {
+					msg.content.client = client;
 					channel.playlist.push(msg.content);
 				}
 				channel.update();

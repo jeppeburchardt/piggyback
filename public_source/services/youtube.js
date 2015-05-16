@@ -49,6 +49,7 @@ define(function(require) {
 					description: item.snippet.description,
 					published: item.snippet.publishedAt,
 					key: item.id.videoId,
+					provider: 'youtube',
 				};
 			}));
 
