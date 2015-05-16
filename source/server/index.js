@@ -1,186 +1,97 @@
-var extend = require('node.extend');
+var Client = require('./client');
+var Channel = require('./channel');
 
-var idSpawn = 0;
+var ChatFeature = require('./features/chat');
+var SyncFeature = require('./features/sync');
+var PlaylistFeature = require('./features/playlist');
 
-function getNewId() {
-	return ++idSpawn;
-}
-
-function Room() {
-
-	var sockets = [];
-
-	var self = this;
-
-	this.title = '';
-	this.id = getNewId();
-	this.playlist = [];
-	this.listeners = [];
-	this.owner = null;
-	this.open = false;
-	this.sync = true;
-
-	this.addSocket = function(socket) {
-		this.listeners.push({
-			id: socket.id,
-			name: socket.name
-		});
-		sockets.push(socket);
-		this.chat(socket.name + ' joined', -1);
-	};
-
-	this.removeSocket = function(socket) {
-		sockets.splice(sockets.indexOf(socket), 1);
-		self.listeners = self.listeners.filter(function(s) {
-			return (s.id != socket.id);
-		});
-		this.chat(socket.name + ' left', -1);
-		if (self.owner == socket.id && self.listeners.length > 0) {
-			self.owner = self.listeners[0].id;
-			this.chat(self.listeners[0].name + ' owns the room', -1);
-		}
-	};
-
-	this.update = function() {
-		sockets.forEach(function(socket) {
-			socket.emit('room', self);
-		});
-	};
-
-	this.next = function() {
-		self.playlist.splice(0, 1);
-	};
-
-	this.sync = function(time) {
-		sockets.forEach(function(socket) {
-			if (self.owner != socket.id) {
-				socket.emit('sync', time);
-			}
-		});
-	};
-
-	this.chat = function(message, sender) {
-		sockets.forEach(function(socket) {
-			socket.emit('chatMessage', {
-				sender: sender,
-				message: message,
-			});
-		});
-	}
-}
 
 function SocketServer(io) {
 
-	var rooms = [],
-		sockets = [];
+	'use strict';
 
-	function getRoomById(id) {
-		var r = rooms.filter(function(room) {
+	var channels = [],
+		clients = [],
+		idSpawn = 0,
+		lobby = [];
+
+	function getNewId() {
+		return ++idSpawn;
+	}
+
+	function getChannelById(id) {
+		var r = channels.filter(function(room) {
 			return (room.id === id);
 		});
 		return (r.length === 1 ? r[0] : null);
 	}
 
 	function updateLobby() {
-		sockets.forEach(function(socket) {
-			socket.emit('rooms', rooms);
+		lobby.forEach(function(client) {
+			client.sendLobbyUpdate(channels);
 		});
 	}
 
-
+	
 	io.on('connection', function (socket) {
 
-		socket.on('setName', function(name) {
-			socket.name = name;
-			socket.emit('name', name);
-		});
+		var client = new Client(getNewId(), socket);
 
-		socket.on('setRoom', function(id) {
-			if (socket.roomId) {
-				var oldRoom = getRoomById(socket.roomId);
+		socket.on('setChannel', function(id) {
+			// remove from lobby
+			var lobbyIndex = lobby.indexOf(client);
+			if (lobbyIndex > -1) {
+				lobby.splice(lobbyIndex, 1);
 			}
-			var room = getRoomById(id);
-			socket.roomId = id;
-			room.addSocket(socket);
-			updateLobby();
-			room.update();
-		});
-
-		socket.on('createRoom', function() {
-			var room = new Room();
-			room.title = socket.name + '´s room';
-			room.owner = socket.id;
-			rooms.push(room);
-			socket.roomId = room.id;
-			room.addSocket(socket);
-			updateLobby();
-			room.update();
-		});
-
-		socket.on('addToPlaylist', function(content) {
-			var room = getRoomById(socket.roomId);
-			if (room.owner == socket.id || room.open) {
-				room.playlist.push(content);
+			// clients can only leave a channel by disconnecting
+			// remove old channel 
+			// var channel = client.getChannel();
+			// if (channel) {
+			// 	channel.removeClient(client);
+			// }
+			// add new channel
+			var newChannel = getChannelById(id);
+			if (newChannel) {
+				newChannel.addClient(client);
 			}
-			updateLobby();
-			room.update();
 		});
 
-		socket.on('onPlaybackComplete', function() {
-			var room = getRoomById(socket.roomId);
-			if (room.owner == socket.id) {
-				room.next();
-			}
-			updateLobby();
-			room.update();
-		});
+		socket.on('createChannel', function() {
+			var channel = new Channel(getNewId());
+			channel.owner = client;
+			channel.title = client.name + '´s channel';
 
-		socket.on('setOpen', function (value) {
-			var room = getRoomById(socket.roomId);
-			if (room.owner == socket.id) {
-				room.open = value;
-				room.chat(value ? 'Everyone can modify playlist' : 'Only owner can edit playlist', -1);
-			}
-			room.update(); 
+			channel.addFeature(new ChatFeature());
+			channel.addFeature(new SyncFeature());
+			channel.addFeature(new PlaylistFeature());
+
+			channel.addClient(client);
+			channels.push(channel);
 			updateLobby();
 		});
 
 		socket.on('disconnect', function () {
-			var room = getRoomById(socket.roomId);
-			if (room) {
-				room.removeSocket(socket);
-				if (room.listeners.length == 0) {
-					rooms.splice(rooms.indexOf(room), 1);
+			var channel = client.getChannel();
+			if (channel) {
+				channel.removeClient(client);
+				if (channel.clients.length == 0) {
+					channels.splice(channels.indexOf(channel), 1);
+					updateLobby();
 				}
-				room.update();
-				updateLobby();
 			}
 		});
 
-		socket.on('sync', function (time) {
-			console.log('sync', time);
-			var room = getRoomById(socket.roomId);
-			if (room && room.owner == socket.id) {
-				room.sync(time);
-			}
-		});
+		socket.on('feature', function (obj) {
+			console.log('> feature', obj);
+			var channel = client.getChannel();
+			channel.handleFeatureEvent(client, obj);
+		})
 
-		socket.on('chat', function (message) {
-			var room = getRoomById(socket.roomId);
-			if (room) {
-				room.chat(message, socket.id);
-			}
-		});
+		lobby.push(client);
+		updateLobby();
 
-
-		socket.id = getNewId();
-		socket.emit('id', socket.id);
-		socket.emit('rooms', rooms);
-
-		sockets.push(socket);
 	});
 
 }
-
 
 module.exports = SocketServer;

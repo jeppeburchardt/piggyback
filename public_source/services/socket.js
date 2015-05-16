@@ -17,7 +17,7 @@ define(function(require) {
 			self.id = id;
 			self.onUserChange();
 		}
-		function onRooms (rooms) {
+		function onLobbyUpdate (rooms) {
 			self.rooms = rooms;
 			self.onRoomsChange();
 		}
@@ -25,41 +25,54 @@ define(function(require) {
 			self.name = name;
 			self.onUserChange();
 		}
-		function onRoom (room) {
+		function onChannelUpdate (room) {
 			self.room = room;
 			self.onRoomChange();
 		}
 		function onSync (value) {
+			console.log('onSync', value);
 			self.onSyncUpdate(value);
 		}
 		function onChatMessage (entry) {
 			if (!self.onChatMessage) {
 				return;
 			}
-			self.onChatMessage({
-				message: entry.message,
-				listener: getListenerById(entry.sender),
-				sender: entry.sender
-			});
-		}
-		function getListenerById (id) {
-			if (!self.room || !self.room.listeners) {
-				return null;
-			}
-			var l = self.room.listeners.filter(function(listener){
-				return (listener.id === id);
-			});
-			if (l.length > 0) {
-				return l[0];
-			} else {
-				return null;
-			}
+			self.onChatMessage(entry);
 		}
 		function onDisconnect () {
 			self.id = null;
 			self.name = null;
 			self.isConnected = false;
 			self.onUserChange();
+		}
+		function onFeatureMessage(obj) {
+
+			switch(obj.feature) {
+				
+				case 'chat':
+					onChatMessage(obj);
+					break;
+
+				case 'sync':
+					if (obj.type === 'position') {
+						onSync(obj.value);		
+					}
+					break;
+
+				case 'join':
+					onChatMessage({
+						sender: -1,
+						message: obj.client.name + ' joined'
+					});
+					break;
+
+				case 'leave':
+					onChatMessage({
+						sender: -1,
+						message: obj.client.name + ' left'
+					});
+					break;
+			}
 		}
 
 		// public 
@@ -73,35 +86,70 @@ define(function(require) {
 			socket.emit('setName', name);
 		};
 		this.setRoom = function(id) {
-			socket.emit('setRoom', id);
+			socket.emit('setChannel', id);
 		};
 		this.createRoom = function() {
-			socket.emit('createRoom');
+			socket.emit('createChannel');
 		};
+
+		this.getFeature = function(name) {
+			var r = this.room.features.filter(function(feature){
+				return name === feature.name;
+			});
+			if (r && r.length > 0) {
+				return r[0];
+			} else {
+				return null;
+			}
+		};
+		
+
+		// edit playlist:
 		this.addToPlaylist = function(content) {
-			socket.emit('addToPlaylist', content);
-		};
-		this.onPlaybackComplete = function() {
-			socket.emit('onPlaybackComplete');
+			socket.emit('feature', {
+				feature: 'playlist',
+				type: 'add',
+				content: content,
+			});
 		};
 		this.setOpen = function(value) {
-			socket.emit('setOpen', value);
+			socket.emit('feature', {
+				feature: 'playlist',
+				type: 'accessType',
+				accessType: (value ? 'all' : 'owner'),
+			});
 		};
+
+		// feature sync
 		this.setSync = function(value) {
-			socket.emit('sync', value);
+			socket.emit('feature', {
+				feature: 'sync',
+				type: 'position',
+				value: value,
+			});
 		};
+		this.onPlaybackComplete = function() {
+			socket.emit('feature', {
+				feature: 'sync',
+				type: 'next',
+			});
+		};
+
+		// feature chat
 		this.chat = function(message) {
-			socket.emit('chat', message);
+			socket.emit('feature', {
+				feature:'chat',
+				message: message,
+			});
 		};
 
 		socket.on('connect', onConnect);
 		socket.on('id', onId);
-		socket.on('rooms', onRooms);
+		socket.on('lobby', onLobbyUpdate);
 		socket.on('name', onName);
-		socket.on('room', onRoom);
-		socket.on('sync', onSync);
-		socket.on('chatMessage', onChatMessage);
+		socket.on('channel', onChannelUpdate);
 		socket.on('disconnect', onDisconnect);
+		socket.on('msg', onFeatureMessage);
 	}
 
 	return Socket;

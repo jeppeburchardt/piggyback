@@ -54,7 +54,7 @@ define(function(require) {
 			if (entry.sender !== -1) {
 				return (
 					<div className="chat-entry">
-						<div className="nerf">{entry.listener.name}:</div>
+						<div className="nerf">{entry.sender.name}:</div>
 						<p>{entry.message}</p>
 					</div>
 				);

@@ -29,7 +29,7 @@ define(function (require) {
 					{playlist}
 					<div className="item row padded">
 						<button className="lobby-join item item--fit btn cta" onClick={this.onClick}>Join</button>
-						<div className="item item--fit">Listeners: <span className="cta">{this.props.room.listeners.length}</span></div>
+						<div className="item item--fit">Listeners: <span className="cta">{this.props.room.clients.length}</span></div>
 						<div className="item">Playlist: <span className="cta">{this.props.room.open ? 'Open' : 'Closed'}</span></div>
 					</div>
 				</li>

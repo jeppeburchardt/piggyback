@@ -57,10 +57,19 @@ define(function(require){
 		},
 
 		onRoomChange: function () {
+			var canAdd = false,
+				isOwner = (this.socket.room.owner.id === this.state.userId);
+			var playlistFeature = this.socket.getFeature('playlist');
+			if (playlistFeature) {
+				canAdd = playlistFeature.accessType === 'all';
+			}
+			if (isOwner) {
+				canAdd = true;
+			}
 			this.setState({
 				room: this.socket.room,
-				canAdd: (this.socket.room.owner === this.state.userId || this.socket.room.open),
-				isOwner: (this.socket.room.owner === this.state.userId),
+				canAdd: canAdd,
+				isOwner: isOwner,
 			});
 		},
 
@@ -81,8 +90,8 @@ define(function(require){
 				<div className="app">
 					<div className="grail grail--epic">
 						<div className="item">&nbsp;<div className="spinner"></div></div>
-						<p className="strong item">Connection lost</p>
-						<p className="item">Reconnecting to server</p>
+						<p className="strong item">Connecting...</p>
+						<p className="item">Connecting to server</p>
 					</div>
 				</div>
 			);
@@ -216,6 +225,7 @@ define(function(require){
 
 		onOpenChange: function (value) {
 			this.socket.setOpen(value);
+			console.log('onOpenChange', value);
 		},
 
 		onSyncChange: function (value) {
