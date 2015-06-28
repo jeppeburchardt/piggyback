@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Raleway:300,400,700);
 html,
 body {
   height: 100%;
@@ -23,8 +23,9 @@ ol {
 body,
 input,
 textarea,
-button {
-  font-family: 'Lato', sans-serif;
+button,
+select {
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #666666;
@@ -41,7 +42,7 @@ button {
   font-weight: 700;
 }
 .nerf {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -87,6 +88,7 @@ button {
   -ms-flex: 1;
   flex: 1;
   position: relative;
+  min-width: 0;
 }
 .item--fit {
   -webkit-box-flex: 0 1 auto;
@@ -171,43 +173,44 @@ button {
   color: #dddddd;
   cursor: pointer;
   text-align: center;
-  font-size: 14px;
-  font-weight: 300;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
-.btn:hover {
-  background: #999999;
+.btn:active {
+  background: #4d4d4d;
 }
 .btn.cta {
   background: #ff149d;
   text-transform: uppercase;
 }
-.btn.cta:hover {
-  background: #ff7ac8;
+.btn.cta:active {
+  background: #e00083;
 }
 .btn--outlined {
   background: transparent;
   border: 1px solid;
   text-transform: uppercase;
+  font-weight: 300;
   color: #666666;
 }
-.btn--outlined:hover {
+.btn--outlined:active {
   background: transparent;
-  color: #999999;
+  color: #4d4d4d;
 }
 .btn--outlined.cta {
   background: transparent;
   color: #ff149d;
 }
-.btn--outlined.cta:hover {
+.btn--outlined.cta:active {
   background: transparent;
-  color: #ff7ac8;
+  color: #e00083;
 }
 .btn--clear {
   background: transparent;
   color: #666666;
   padding: 0;
 }
-.btn--clear:hover {
+.btn--clear:active {
   background: transparent;
   color: #ff149d;
 }
@@ -243,8 +246,7 @@ button {
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: 300;
+  position: relative;
 }
 .checkbox input[type=checkbox] {
   position: absolute;
@@ -252,29 +254,31 @@ button {
 }
 .checkbox .label {
   color: #999999;
-  -webkit-transition: all 300ms;
-  transition: all 300ms;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 .checkbox .label:before {
-  -webkit-transition: all 300ms;
-  transition: all 300ms;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
   display: inline-block;
   height: 1em;
   width: 2em;
   content: "";
   background: #666666;
-  vertical-align: middle;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
   border-radius: 0.5em;
   margin-right: 4px;
 }
 .checkbox .label:after {
-  -webkit-transition: all 300ms;
-  transition: all 300ms;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   position: absolute;
-  bottom: 0;
+  bottom: 1px;
   left: 0;
   width: 1em;
   height: 1em;
@@ -293,6 +297,52 @@ button {
   left: 1em;
   border: 1px solid #ff149d;
 }
+.select {
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
+  color: #dddddd;
+  background: #666666;
+  font-weight: 300;
+  -webkit-transition: background-color 300ms ease-in-out;
+  transition: background-color 300ms ease-in-out;
+}
+.select:before {
+  position: absolute;
+  right: 16px;
+  bottom: 8px;
+  display: block;
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  color: inherit;
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  transform: rotate(45deg);
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.select select {
+  cursor: pointer;
+  margin-right: -16px;
+  padding: 4px 64px 4px 16px;
+  line-height: inherit;
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  text-transform: inherit;
+  background: transparent;
+  -webkit-appearance: none;
+  border: none;
+}
+.select.epic:before {
+  bottom: 10px;
+}
+.select.cta {
+  background: #ff149d;
+}
 .player {
   min-width: 400px;
   min-height: 300px;
@@ -302,7 +352,9 @@ button {
   height: 100%;
 }
 .content-title,
-.content-description {
+.content-description,
+.content-provider,
+.content-client {
   text-align: left;
 }
 .content-image {
