@@ -27,6 +27,9 @@
     "requirejs-text": "~2.0.12",
     "bower": "~1.4.1",
     "grunt-contrib-jshint": "~0.11.2",
-    "grunt-jsxhint": "~0.6.0"
+    "grunt-jsxhint": "~0.6.0",
+    "grunt-react": "~0.12.2",
+    "grunt-browserify": "~3.8.0",
+    "reactify": "~1.1.1"
   }
 }

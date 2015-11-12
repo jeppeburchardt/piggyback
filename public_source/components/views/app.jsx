@@ -1,4 +1,4 @@
-define(function(require){
+
 
 	'use strict';
 	
@@ -243,6 +243,4 @@ define(function(require){
 
 	});
 
-	return App;
-
-});
+	module.exports = App;
